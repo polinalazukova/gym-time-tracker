@@ -102,13 +102,14 @@ button:hover {
 
 @media (max-width: 480px) {
     .container, .history {
-        width: 90%;
+        width: 87%;
         padding: 12px;
     }
 
     #status {
         width: 100%;
         font-size: 16px;
+        box-sizing: border-box;
     }
 
     button {
@@ -121,8 +122,5 @@ button:hover {
         width: 30%;
         font-size: 13px;
         padding: 5px 8px;
-    }
-    .history {
-        max-height: 200px;
     }
 }
