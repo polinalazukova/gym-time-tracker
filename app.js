@@ -18,7 +18,7 @@ function getDuration(start, end) {
 
 function checkIn() {
     if (timerInterval) {
-        return; /
+        return;
     }
 
     startTime = new Date();
@@ -41,8 +41,55 @@ function checkOut() {
 
     clearInterval(timerInterval);
     timerInterval = null;
-    startTime = null;
 
     statusText.textContent = `Тренировка завершена!\nДлительность: ${finalDuration}`;
+
+    saveHistory(startTime, endTime, finalDuration);
+
+    startTime = null;
 }
 
+function saveHistory(start, end, duration) {
+    const history = JSON.parse(localStorage.getItem("trainingHistory") || "[]");
+
+    const dateStr = new Date().toLocaleDateString("ru-RU");
+
+    history.unshift({
+        date: dateStr,
+        start: formatTime(start),
+        end: formatTime(end),
+        duration: duration,
+        id: Date.now()
+    });
+
+    localStorage.setItem("trainingHistory", JSON.stringify(history));
+    renderHistory();
+}
+
+function renderHistory() {
+    const history = JSON.parse(localStorage.getItem("trainingHistory") || "[]");
+    const list = document.getElementById("historyList");
+    list.innerHTML = "";
+
+    history.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <b>${item.date}</b><br>
+            Начало: ${item.start} — Конец: ${item.end}
+            <br>
+            Длительность: ${item.duration}
+            <br>
+            <button onclick="deleteHistory(${item.id})">Удалить</button>
+        `;
+        list.appendChild(li);
+    });
+}
+
+function deleteHistory(id) {
+    let history = JSON.parse(localStorage.getItem("trainingHistory") || "[]");
+    history = history.filter(item => item.id !== id);
+    localStorage.setItem("trainingHistory", JSON.stringify(history));
+    renderHistory();
+}
+
+renderHistory();

@@ -8,10 +8,11 @@ body {
     background-color: #f0f2fa;
     font-family: Arial, sans-serif;
     text-align: center;
+    flex-direction: column;   /* вертикальное расположение блоков */
 }
 
 .container {
-   width: 25%;
+    width: 25%;
     min-width: 320px;
     padding: 30px;
     border-radius: 12px;
@@ -25,6 +26,10 @@ h1 {
     color: #001a6e;
     font-size: 36px;
     margin-bottom: 20px;
+}
+h2 {
+    color: #001a6e;
+    font-size: 20px;
 }
 
 #status {
@@ -44,9 +49,9 @@ h1 {
 button {
     width: 40%;
     box-sizing: border-box;
-    padding: 15px 30px;
+    padding: 15px 15px;
     font-size: 20px;
-    margin: 10px 0;
+    margin: 5px 0;
     color: #000033;
     background-color: #FF9966;
     border: 3px solid;
@@ -55,4 +60,59 @@ button {
 
 button:hover {
     background-color: #CCCCCC;
+}
+
+.history {
+    width: 35%;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 10px;
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(45deg, #000033, #ff0000) border-box;
+    border: 4px solid transparent;
+    border-radius: 12px;
+}
+
+.history ul {
+    list-style: none;
+    padding: 0;
+}
+
+.history li {
+    margin-bottom: 5px;
+    padding: 2px;
+    border: 2px solid #000033;
+    border-radius: 8px;
+    background-color: #eceef5;
+}
+
+.history button {
+    width: 20%;
+    margin-top: 3px;
+    padding: 3px 6px;
+    font-size: 14px;
+    border-radius: 8px;
+    background:
+        linear-gradient(#6699CC, #6699CC) padding-box,
+        linear-gradient(45deg, #000033, #ff0000) border-box;
+    border: 2px solid transparent;
+}
+
+@media (max-width: 480px) {
+    .container, .history {
+        width: 95%;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    .history button {
+        font-size: 13px;
+        padding: 5px 8px;
+    }
 }
